@@ -5,7 +5,7 @@ class Nav extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.butoon} onPress={()=>{alert("you clicked me")}}>
+        <TouchableOpacity style={styles.button} onPress={()=>{alert("you clicked me")}}>
           <Image source={require("../assets/menu.png")}/>
         </TouchableOpacity>
         <TouchableOpacity style={styles.titleButton} onPress={()=>{alert("Retour à l'accueil")}}>
@@ -13,10 +13,10 @@ class Nav extends React.Component {
               Jouets en Bois
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.butoon} onPress={()=>{alert("you clicked me")}}>
+        <TouchableOpacity style={styles.button} onPress={()=>{alert("you clicked me")}}>
           <Image source={require("../assets/profile.png")}/>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.butoon} onPress={()=>{alert("you clicked me")}}>
+        <TouchableOpacity style={styles.button} onPress={()=>{alert("you clicked me")}}>
           <Image source={require("../assets/cart.png")}/>
         </TouchableOpacity>
       </View>
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     textAlign: "center",
   },
-  butoon: {
+  button: {
     backgroundColor: 'white',
     padding: 10,
     width: 55
