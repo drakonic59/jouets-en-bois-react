@@ -27,7 +27,7 @@ const data = [
   }
 ]
 
-class ComonCarousel extends React.Component {
+class CommonCarousel extends React.Component {
   render() {
     return (
       <View style={styless.container}>
@@ -68,4 +68,4 @@ const styless = StyleSheet.create({
   }
 });
 
-export default ComonCarousel;
+export default CommonCarousel;

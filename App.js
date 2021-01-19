@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CommonCarousel from "./components/ComonCarousel"
+import CommonCarousel from "./components/CommonCarousel"
 
 class App extends Component {
 
