@@ -36,7 +36,7 @@ async function getListOfPopularProducts() {
   .then( function(json) {
     
     json.getElementById("products").forEach(function (product) {
-      console.log("tet");
+      console.log("test");
     })
 
     let countElement = document.getElementById("taskCount");
