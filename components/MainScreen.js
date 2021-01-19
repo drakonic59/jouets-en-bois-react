@@ -1,6 +1,6 @@
 import React from 'react'
 import View from 'react-native';
-import ComonCarousel from "./ComonCarousel"
+import CommonCarousel from "./CommonCarousel"
 import Nav from "./Nav"
 import FadingSlides from 'react-native-fading-slides';
 
