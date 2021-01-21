@@ -1,5 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, TouchableOpacity, Image, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { getResource} from "../api/apiConnection";
 
 class Nav extends React.Component {
   render() {

@@ -1,9 +1,6 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { StyleSheet, View, Text, FlatList } from 'react-native'
 import FadingSlides from 'react-native-fading-slides';
-import styles from 'react-native-fading-slides/index.styles';
-import Nav from "./Nav"
-import Products from "./Products"
 
 const slides = [
   {
@@ -18,21 +15,10 @@ const slides = [
   }
 ];
 
-const data = [
-  {
-     title:"Star Wars VIII - Les derniers Jedi",
-  },
-  {
-     title:"La Guerre des étoiles",
-  }
-]
-
-class CommonCarousel extends React.Component {
+class CommonCarousel extends Component {
   render() {
     return (
-      <View style={styless.container}>
-        <Nav/>
-        <View style={styless.carou}>
+        <View style={styles.carou}>
           <FadingSlides
             slides={slides}
             fadeDuration={3000}
@@ -41,30 +27,15 @@ class CommonCarousel extends React.Component {
             startAnimation={true}
           />
         </View>
-        <Text style={styless.title}>
-          POPULAR PRODUCTS
-        </Text>
-        <Products/>
-      </View>
     )
   }
 }
 
-const styless = StyleSheet.create({
+const styles = StyleSheet.create({
   carou: {
     marginTop: 60,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  container: {
-    backgroundColor: '#CAC9C8',
-    flex: 1
-  },
-  title: {
-    fontSize: 25,
-    marginTop: 60,
-    fontWeight: "bold",
-    textAlign: "center"
   }
 });
 
