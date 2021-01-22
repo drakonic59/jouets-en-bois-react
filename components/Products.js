@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, View, Image} from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -27,22 +27,22 @@ const styles = StyleSheet.create({
 
 class Products extends Component
 {
+
     constructor(props) {
         super(props)
         this.state = {
             isLoading: true,
             dataSource: []
-        }
+        };
     }
 
-    componentDidMount() {
+    componentDidMount = async () => {
         const imageUrl = "http://jouetenbois.mathieu-boucher.fr/api/images/products/";
         const key = "ws_key=3MJFI6WYD6GWDGJ8QECM6TZAZ6V65VUE";
-        let url = "http://jouetenbois.mathieu-boucher.fr/api/products/?" + key + "&output_format=JSON&display=[id,name,price,id_default_image]";
-        var infos = "{ \"products\": [";
+        const url = "http://jouetenbois.mathieu-boucher.fr/api/products/?" + key + "&output_format=JSON&display=[id,name,price,id_default_image]";
 
-        fetch(url)
-        .then( function(response) {
+        let json = await fetch(url)
+        .then( function(response) { 
 			if(response.ok) {
 				console.log("ok");
 			} else
@@ -50,30 +50,34 @@ class Products extends Component
 			return response.json();
 		})
 		.then( function(data) {
-									
-			data.products.forEach(function (product) {
+                            
+            let infos = "[";
+			data.products.forEach( function (product) {
                 infos += " { "
                             + "\"id\": " + product.id + ", "
                             + "\"name\": \"" + product.name.shift().value + "\", "
 							+ "\"price\": \"" + product.price + "\", "
-							+ "\"image\": \"" + imageUrl + product.id + "/" + product.id_default_image + "?" + key + "\" "
+							+ "\"image\": \"" + imageUrl + product.id + "/" + product.id_default_image + "?" + key + "\""
 						+ "},";		
 			});
-            infos = infos.substring(0, infos.length - 1) + " ] }";
+            infos = infos.substring(0, infos.length - 1) + " ]";
             let json = JSON.parse(infos);
-            console.log(json);
-            console.log(data);
-			this.setState({
-                isLoading: false,
-                dataSource: json.products
-            });
-		});
+            return json;
+        });
+        console.log(json);
+        console.log("JSON OK");
+
+        this.setState({
+            isLoading: false,
+            dataSource: json,
+        });
     }
 
-    _renderItem = ({item, index}) => {
+    _renderItem = ({item}) => {
         return (
             <View style={styles.items}>
-                <Text>{item}note</Text>
+                <Text>{item.name} {console.log(item.image)}</Text>
+                <Image source={item.image} />
             </View>
         )
     }
@@ -86,7 +90,9 @@ class Products extends Component
                     <Text style={styles.title}>
                         POPULAR PRODUCTS
                     </Text>
-                    <Text>Aucun produit !</Text>
+                    <Text style={styles.title}>
+                        Aucun produit !
+                    </Text>
                 </View>
             )
         } else {
@@ -98,7 +104,7 @@ class Products extends Component
                     <FlatList
                         data={dataSource}
                         renderItem={this._renderItem}
-                        keyExtractor={(item, index) => index.toString()}
+                        keyExtractor={item => item.id}
                     />
                 </View>
             )
