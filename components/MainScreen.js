@@ -1,10 +1,8 @@
 import React, {Component} from 'react'
-import { StyleSheet, View, TouchableOpacity, Image, Text } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import CommonCarousel from "./CommonCarousel"
-import Nav from "./Nav"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Products from "./Products";
-import NavigationDrawer from "../screens/NavigationDrawer";
 import { NavigationContainer } from '@react-navigation/native';
 import {
   createDrawerNavigator,
@@ -15,10 +13,45 @@ import {
 
 function Categories() {
   return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text>Catégories</Text>
-      </View>
+    <View style={styles.container}>
+      <Nav navig={navigation} />
+      <CommonCarousel />
+      <Text>
+        Catégories !
+      </Text>
+    </View>
   );
+}
+
+function Nav(props) {
+  return (
+    <View style={styles.container_nav}>
+        <TouchableOpacity style={styles.button} onPress={() => props.navig.toggleDrawer()}>
+            <MaterialIcons name="menu" style={styles.menu} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.titleButton} onPress={()=>{alert("Retour à l'accueil")}}>
+            <Text style={styles.title}>
+                Jouets en Bois
+            </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={()=>{alert("you clicked me")}}>
+            <MaterialIcons name="person" style={styles.login} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={()=>{alert("you clicked me")}}>
+            <MaterialIcons name="shopping-cart" style={styles.cart} />
+        </TouchableOpacity>
+    </View>
+  );
+}
+
+function Accueil({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Nav navig={navigation} />
+      <CommonCarousel />
+      <Products />
+    </View>
+  )
 }
 
 function CustomDrawerContent(props) {
@@ -61,42 +94,16 @@ class MainScreen extends Component {
   }
 
   render() {
-    let { isList, isMenu, isCart, isProfile} = this.state
-    if (isList) {
-      return (
-        <View style={styles.container}>
-          <View style={styles.container_nav}>
-              <TouchableOpacity style={styles.button} onPress={this._changeStateMenu}>
-                  <MaterialIcons name="menu" style={styles.menu} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.titleButton} onPress={()=>{alert("Retour à l'accueil")}}>
-                  <Text style={styles.title}>
-                      Jouets en Bois
-                  </Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={()=>{alert("you clicked me")}}>
-                  <MaterialIcons name="person" style={styles.login} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={()=>{alert("you clicked me")}}>
-                  <MaterialIcons name="shopping-cart" style={styles.cart} />
-              </TouchableOpacity>
-          </View>
-          <CommonCarousel />
-          <Products />
-        </View>
-      )
-    } else if (isMenu) {
       return (
         <View style={styles.container}>
           <NavigationContainer>
             <Drawer.Navigator drawerContent={props => <CustomDrawerContent {...props} />}>
-              <Drawer.Screen name="Accueil" component={MainScreen} />
+              <Drawer.Screen name="Accueil" component={Accueil} />
               <Drawer.Screen name="Catégories" component={Categories} />
             </Drawer.Navigator>
-          </NavigationContainer>
+          </NavigationContainer>  
         </View>
       )
-    }
   }
 }
 
