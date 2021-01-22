@@ -34,7 +34,7 @@ function Nav(props) {
                 Jouets en Bois
             </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={()=>{alert("you clicked me")}}>
+        <TouchableOpacity style={styles.button} onPress={()=>{props.navig.login()}}>
             <MaterialIcons name="person" style={styles.login} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={()=>{alert("you clicked me")}}>
@@ -50,6 +50,16 @@ function Accueil({ navigation }) {
       <Nav navig={navigation} />
       <CommonCarousel />
       <Products />
+    </View>
+  )
+}
+
+function Login({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Nav navig={navigation} />
+      <CommonCarousel />
+      <Login />
     </View>
   )
 }
@@ -100,6 +110,7 @@ class MainScreen extends Component {
             <Drawer.Navigator drawerContent={props => <CustomDrawerContent {...props} />}>
               <Drawer.Screen name="Accueil" component={Accueil} />
               <Drawer.Screen name="Catégories" component={Categories} />
+              <Drawer.Screen name="Login" component={Login} />
             </Drawer.Navigator>
           </NavigationContainer>  
         </View>
