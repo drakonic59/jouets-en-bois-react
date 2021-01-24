@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { StyleSheet, View, Text, FlatList } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import FadingSlides from 'react-native-fading-slides';
 
 const slides = [

@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
-import CommonCarousel from "./CommonCarousel"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import Products from "./Products";
 import { NavigationContainer } from '@react-navigation/native';
+import CommonCarousel from "./CommonCarousel"
+import Products from "./Products";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -11,7 +11,7 @@ import {
   DrawerItem,
 } from '@react-navigation/drawer';
 
-function Categories() {
+function Categories({ navigation }) {
   return (
     <View style={styles.container}>
       <Nav navig={navigation} />
@@ -59,11 +59,7 @@ function CustomDrawerContent(props) {
       <DrawerContentScrollView {...props}>
           <DrawerItemList {...props} />
           <DrawerItem
-              label="Close drawer"
-              onPress={() => props.navigation.closeDrawer()}
-          />
-          <DrawerItem
-              label="Toggle drawer"
+              label="Close Menu"
               onPress={() => props.navigation.toggleDrawer()}
           />
       </DrawerContentScrollView>
